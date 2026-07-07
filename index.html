@@ -1,4 +1,503 @@
-Trang web của tôi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Do Trong Nguyen — Solution Architect</title>
+<style>
+  :root{
+    --bg:#0f1115;
+    --panel:#161a21;
+    --panel2:#1b2029;
+    --accent:#e8912d;
+    --text:#e7e9ee;
+    --text-dim:#9aa3b2;
+    --border:#2a2f3a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
 
+  header.hero{
+    padding:60px 24px 40px;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,#171b22,#0f1115);
+  }
+  .avatar{
+    width:120px;height:120px;border-radius:50%;
+    margin:0 auto 20px;
+    background:linear-gradient(135deg,var(--accent),#c9631b);
+    display:flex;align-items:center;justify-content:center;
+    font-size:42px;font-weight:700;color:#111;
+  }
+  header.hero h1{font-size:2.2rem;letter-spacing:1px;}
+  header.hero .title{color:var(--accent);font-size:1.15rem;margin-top:4px;font-weight:600;}
+  header.hero .meta{color:var(--text-dim);margin-top:14px;font-size:0.95rem;}
+  .contact-row{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:18px;margin-top:20px;font-size:0.9rem;
+  }
+  .contact-row span{color:var(--text-dim);}
 
-    Chào thế giới! Đây là trang web github.io đầu tiên của tôi.
+  main{max-width:1000px;margin:0 auto;padding:0 24px 80px;}
+
+  section{margin-top:48px;}
+  h2.section-title{
+    font-size:1.3rem;color:var(--accent);
+    text-transform:uppercase;letter-spacing:1px;
+    border-bottom:2px solid var(--accent);
+    padding-bottom:8px;margin-bottom:24px;
+    display:inline-block;
+  }
+
+  .about p{color:var(--text-dim);margin-bottom:10px;}
+  .about ul{margin-top:12px;padding-left:20px;color:var(--text-dim);}
+  .about li{margin-bottom:8px;}
+  .about strong{color:var(--text);}
+
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:16px;
+  }
+  .skill-card{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:8px;padding:16px 18px;
+  }
+  .skill-card h3{color:var(--accent);font-size:0.95rem;margin-bottom:8px;letter-spacing:0.5px;}
+  .skill-card ul{padding-left:18px;color:var(--text-dim);font-size:0.88rem;}
+  .skill-card li{margin-bottom:4px;}
+
+  .exp-item, .edu-item{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:8px;padding:20px 22px;margin-bottom:18px;
+  }
+  .exp-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline;}
+  .exp-head h3{font-size:1.05rem;color:var(--text);}
+  .exp-head .company{color:var(--accent);font-weight:600;}
+  .exp-head .dates{color:var(--text-dim);font-size:0.85rem;white-space:nowrap;}
+  .exp-item h4{margin-top:14px;color:var(--accent);font-size:0.85rem;text-transform:uppercase;letter-spacing:0.5px;}
+  .exp-item ul{padding-left:20px;color:var(--text-dim);margin-top:6px;font-size:0.92rem;}
+  .exp-item li{margin-bottom:5px;}
+
+  .proj-item{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:8px;padding:20px 22px;margin-bottom:18px;
+  }
+  .proj-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:baseline;}
+  .proj-head h3{font-size:1.05rem;color:var(--text);}
+  .proj-head .dates{color:var(--text-dim);font-size:0.85rem;white-space:nowrap;}
+  .proj-desc{color:var(--text-dim);font-size:0.9rem;margin:8px 0;}
+  .proj-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:0.85rem;color:var(--text-dim);margin-bottom:10px;}
+  .proj-meta span strong{color:var(--text);}
+  .proj-item details summary{cursor:pointer;color:var(--accent);font-size:0.88rem;margin-top:6px;}
+  .proj-item ul{padding-left:20px;color:var(--text-dim);margin-top:8px;font-size:0.88rem;}
+  .proj-item li{margin-bottom:5px;}
+  .tech-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .tech-tags span{
+    background:var(--panel2);border:1px solid var(--border);
+    color:var(--text-dim);font-size:0.75rem;padding:3px 9px;border-radius:12px;
+  }
+
+  table.cert-table, table.award-table{width:100%;border-collapse:collapse;}
+  table.cert-table td, table.award-table td{
+    padding:9px 6px;border-bottom:1px solid var(--border);font-size:0.92rem;
+  }
+  table.cert-table td:first-child, table.award-table td:first-child{
+    color:var(--accent);font-weight:600;white-space:nowrap;width:110px;
+  }
+
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  @media (max-width:720px){.two-col{grid-template-columns:1fr;}}
+
+  .refs{color:var(--text-dim);font-size:0.92rem;}
+  .refs p{margin-bottom:8px;}
+
+  footer{
+    text-align:center;padding:40px 24px;color:var(--text-dim);
+    border-top:1px solid var(--border);font-size:0.85rem;
+  }
+  footer .links{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:14px;}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="avatar">DN</div>
+  <h1>DO TRONG NGUYEN</h1>
+  <div class="title">Solution Architect</div>
+  <div class="contact-row">
+    <span>📍 Vietnam</span>
+    <span>✉ <a href="mailto:giaosucan1983@gmail.com">giaosucan1983@gmail.com</a></span>
+    <span>📞 0941-295-8-</span>
+    <span>🔗 <a href="https://www.linkedin.com/in/giaosucan/" target="_blank">LinkedIn</a></span>
+  </div>
+</header>
+
+<main>
+
+  <section class="about">
+    <h2 class="section-title">About</h2>
+    <p>Solution architect with <strong>15+ years</strong> of experience in IT engineering. "Work Smarter, Not Harder" is my motto. I like working with excellent people throughout the world and contributing to IT communities.</p>
+    <ul>
+      <li><strong>7+ years</strong> of experience in software development across embedded systems, mobile, and web applications.</li>
+      <li><strong>8+ years</strong> of experience in cloud infrastructure and DevOps technology stacks. Proven track record of designing, implementing, and managing scalable and efficient cloud-based solutions to support organizational goals and objectives.</li>
+      <li>Hands-on experience in technical writing: articles, presentations, books, software specs, and design documents.</li>
+      <li>Led and mentored a team of <strong>50+ engineers</strong> across Software Development, Cloud Infrastructure, and DevOps, driving architecture design, delivery excellence, and operational reliability.</li>
+      <li>Good English communication skills internally with the team and externally with the client.</li>
+      <li>Pre-sale support, leveraging technical expertise and industry knowledge to understand client requirements, propose solutions to clients, and drive successful sales outcomes.</li>
+    </ul>
+  </section>
+
+  <section class="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Cloud Computing</h3>
+        <ul><li>Proficiency in AWS, Azure, and GCP</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>CI/CD</h3>
+        <ul>
+          <li>CICD Pipeline (Jenkins/Azure DevOps) — provisioning scalable Jenkins from scratch, pipelines in Groovy</li>
+          <li>CD GitOps (Spinnaker/ArgoCD) to deploy applications to K8s</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>MLOps</h3>
+        <ul>
+          <li>End-to-end ML lifecycle: training, evaluation, deployment, monitoring</li>
+          <li>Automated deployment, scaling, monitoring of ML models</li>
+          <li>Model performance monitoring, logging, automated retraining pipelines</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Container Orchestration</h3>
+        <ul>
+          <li>Kubernetes (AKS/EKS/GKE) — 4 years managing containerized apps, cluster deployment and scaling</li>
+          <li>AWS ECS — hands-on deploying microservices to ECS cluster</li>
+          <li>7+ years with Docker / containerization</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Observability</h3>
+        <ul>
+          <li>4 years implementing/deploying Datadog and Splunk on K8s and VM (Helm, Saltstack)</li>
+          <li>Monitoring with CloudWatch, Azure Monitor, Stackdriver, Prometheus, Grafana</li>
+          <li>Logging solutions with Splunk, Logstash, Redis, Elasticsearch</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Infra as Code</h3>
+        <ul><li>5+ years automating infrastructure with Terraform and Terragrunt; IaC security with Aqua and Snyk</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Programming</h3>
+        <ul><li>4 years Python for DevOps development, scripting in Bash/PowerShell</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Linux Administration</h3>
+        <ul><li>2 years managing CentOS and Ubuntu systems</li></ul>
+      </div>
+      <div class="skill-card">
+        <h3>Foreign Languages</h3>
+        <ul><li>English — good speaking, writing, reading</li><li>Japanese — basic</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="experience">
+    <h2 class="section-title">Work Experience</h2>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <h3>Solution Architect <span class="company">— FPT Software Corp</span></h3>
+        <span class="dates">5/2015 – Now</span>
+      </div>
+      <h4>Solution Design and Architecture</h4>
+      <ul>
+        <li>Lead the design and development of innovative solutions to meet client needs.</li>
+        <li>Design, implementation, and maintenance of an organization's cloud infrastructure.</li>
+      </ul>
+      <h4>Technical Consulting</h4>
+      <ul>
+        <li>Advising on cloud strategies, migrations, and management for AWS, Azure, and Google Cloud.</li>
+        <li>Providing specialized expertise and advice to businesses regarding client technology and IT strategies.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-head">
+        <h3>Technical Leader <span class="company">— Panasonic R&D Center</span></h3>
+        <span class="dates">5/2007 – 5/2015</span>
+      </div>
+      <ul>
+        <li>Leading technical projects, ensuring team productivity and technical quality; primary point of contact for technical issues.</li>
+        <li>Technical specialist, team support, technical consulting, guidance and leadership.</li>
+        <li>Designing, coding, testing, and maintaining software applications.</li>
+        <li>Developed software / participated in code reviews per technical specifications and design documents.</li>
+        <li>Coaching and developing junior team members.</li>
+        <li>Research in image processing and microprocessor technology.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="two-col">
+    <section class="education">
+      <h2 class="section-title">Education</h2>
+      <div class="edu-item">
+        <div class="exp-head">
+          <h3>Machine Learning Trainee <span class="company">— Coursera</span></h3>
+          <span class="dates">1/2017 – 6/2017</span>
+        </div>
+        <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">Online learning platform offering courses, specializations, and degree programs across a wide range of subjects.</p>
+      </div>
+      <div class="edu-item">
+        <div class="exp-head">
+          <h3>Bachelor of Electronic Engineering <span class="company">— Hanoi University of Technology (HUST)</span></h3>
+          <span class="dates">5/2001 – 6/2006</span>
+        </div>
+        <p style="color:var(--text-dim);font-size:0.9rem;margin-top:8px;">One of the oldest and most prestigious technical universities in Vietnam, established 1956. Strong emphasis on engineering, technology, and applied sciences.</p>
+      </div>
+    </section>
+
+    <section class="awards">
+      <h2 class="section-title">Honors &amp; Awards</h2>
+      <table class="award-table">
+        <tr><td>2025</td><td>FPT Software Star Award</td></tr>
+        <tr><td>2020</td><td>FPT Potato Tech Mag magazine's best contributor</td></tr>
+        <tr><td>2019</td><td>FPT Outstanding Technologist</td></tr>
+        <tr><td>2018</td><td>FPT Software TOP 100 Best Performers</td></tr>
+        <tr><td>2015</td><td>FPT Certificate of Excellent</td></tr>
+        <tr><td>2014</td><td>PANASONIC Award</td></tr>
+      </table>
+    </section>
+  </div>
+
+  <section class="certifications">
+    <h2 class="section-title">Certifications</h2>
+    <table class="cert-table">
+      <tr><td>5/2024</td><td>Google Professional Cloud Architect</td></tr>
+      <tr><td>4/2024</td><td>Microsoft Certified: Azure Design and Implement Solution (AZ-305)</td></tr>
+      <tr><td>3/2024</td><td>AWS Certified Solutions Architect – Professional</td></tr>
+      <tr><td>11/2021</td><td>Microsoft Certified: Azure Fundamentals</td></tr>
+      <tr><td>8/2020</td><td>AWS Certified Developer Associate</td></tr>
+      <tr><td>5/2020</td><td>AWS Certified Solution Architect Associate</td></tr>
+      <tr><td>3/2018</td><td>Blockchain Expert Certificate</td></tr>
+      <tr><td>6/2016</td><td>Oracle SQL Expert</td></tr>
+      <tr><td>12/2015</td><td>Oracle Java SE 6 Programmer Certified Professional</td></tr>
+    </table>
+  </section>
+
+  <section class="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>D* — Lead Engineer</h3><span class="dates">11/2024 – Now</span></div>
+      <p class="proj-desc">London-based specialist professional services and technology firm focused on insurance, financial services, and other highly regulated markets. Designed, implemented, and managed secure, scalable Azure infrastructure supporting enterprise insurance/financial platforms in a regulated environment.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 60</span></div>
+      <details>
+        <summary>Responsibilities &amp; achievements</summary>
+        <ul>
+          <li>Designed and deployed enterprise-grade Azure infrastructure across Dev/UAT/Prod subscriptions.</li>
+          <li>Architected hub-and-spoke network topology (VNets, VNet Peering, NSGs, Azure Firewall, Private Endpoints).</li>
+          <li>Implemented identity/access governance with Azure AD (Entra ID), RBAC, Managed Identities, Conditional Access.</li>
+          <li>Designed secure storage architecture using Azure Storage, Azure SQL, Private Link, Key Vault.</li>
+          <li>Implemented IaC with Terraform to standardize deployments and reduce manual configuration risk.</li>
+          <li>Designed and deployed MLOps pipelines using Azure Machine Learning with CI/CD integration.</li>
+          <li>Implemented AI agent workflows for document processing, claims analysis, and RAG-based knowledge retrieval.</li>
+          <li>Model versioning, experiment tracking, and registry via MLflow and Azure Machine Learning.</li>
+          <li><strong>Achievement:</strong> reduced environment provisioning time by 60%; implemented Zero-Trust network architecture; cut deployment time via Terraform automation by 50%+.</li>
+        </ul>
+      </details>
+      <div class="tech-tags">
+        <span>Azure VNet</span><span>Entra ID</span><span>RBAC</span><span>Terraform</span>
+        <span>GitHub Actions</span><span>Azure ML</span><span>MLflow</span><span>Azure AI Foundry</span>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>CJ* — Operational Manager</h3><span class="dates">4/2022 – 11/2024</span></div>
+      <p class="proj-desc">Global leader in Conversation Intelligence, specializing in data, voice, and text analysis.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 7</span></div>
+      <details>
+        <summary>Responsibilities &amp; achievements</summary>
+        <ul>
+          <li>Managed DevOps team, assigning/monitoring workflow, ensuring quality and efficiency.</li>
+          <li>Implemented MLOps SageMaker pipeline to train and deploy language models.</li>
+          <li>Implemented monitoring with CloudWatch and Azure Monitor for EC2 and Azure App Services.</li>
+          <li>Implemented security automation in CI/CD pipelines; integrated security testing tools; maintained IaC for secure cloud environments.</li>
+          <li>Designed multi-account AWS infrastructure using Terraform and Terragrunt.</li>
+          <li><strong>Achievement:</strong> resolved 70% of security findings; improved uptime via auto-healing; saved 25% cost monthly via FinOps.</li>
+        </ul>
+      </details>
+      <div class="tech-tags">
+        <span>Terraform</span><span>Terragrunt</span><span>AWS</span><span>Azure</span><span>EKS</span><span>AKS</span>
+        <span>Snyk</span><span>Trivy</span><span>SonarQube</span><span>SageMaker</span><span>AzureML</span>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>S* — SRE Lead</h3><span class="dates">4/2018 – 6/2023</span></div>
+      <p class="proj-desc">Global secure and compliant markets' infrastructure and technology platform. Built scalable CI/CD pipelines with Kubernetes, monitoring &amp; logging systems, and intelligent IT infrastructure analysis.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 10</span></div>
+      <details>
+        <summary>Responsibilities &amp; achievements</summary>
+        <ul>
+          <li>Developed CI pipeline in Jenkins to spin up pods on AWS infra and deploy applications.</li>
+          <li>Designed monitoring dashboards and alerting with Datadog across 10+ GKE clusters.</li>
+          <li>Created/managed Helm charts for complex K8s deployments using GitOps principles.</li>
+          <li>Built CI/CD infra (GitHub/Jenkins/ArgoCD) on Kubernetes supporting thousands of jobs.</li>
+          <li>Provisioned/managed AWS &amp; GCP infra via Terraform; migrated AWS infrastructure to GCP.</li>
+          <li>Implemented networking (VPC Peering, Transit Gateway, Security Groups) and Saltstack state on EC2.</li>
+          <li>Embedded security tooling in CI/CD pipelines, automated vulnerability scanning.</li>
+          <li><strong>Achievement:</strong> led 10-person SRE team managing 20K+ Jenkins jobs, 10 K8s clusters, 600 AWS instances serving 500 developers; 20% infra cost reduction.</li>
+        </ul>
+      </details>
+      <div class="tech-tags">
+        <span>Jenkins</span><span>ArgoCD</span><span>Spinnaker</span><span>Snyk</span><span>Trivy</span><span>OWASP</span>
+        <span>AWS</span><span>GCP</span><span>K8s</span><span>GKE</span><span>Docker</span><span>Helm</span>
+        <span>Datadog</span><span>Splunk</span><span>Prometheus</span><span>Grafana</span>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>LE* — Cloud Architect</h3><span class="dates">4/2018 – 4/2021</span></div>
+      <p class="proj-desc">Financial company providing end-to-end syndication/origination, secondary trading, retail loan securitization, and lead generation for loan arrangers. Built enterprise-scale loan trading software supporting multiple traders, portfolios, locations, and currencies.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 20</span></div>
+      <details>
+        <summary>Responsibilities &amp; achievements</summary>
+        <ul>
+          <li>Designed software architecture (Clean Architecture) and Azure infrastructure architecture (HA, security, DR).</li>
+          <li>Provisioned Azure infrastructure via Terraform; designed CI/CD pipelines in Azure DevOps.</li>
+          <li>Designed/implemented ELK-based logging solution on Azure AKS.</li>
+          <li>Designed and deployed blockchain infrastructure (Hyperledger) on Azure K8s.</li>
+          <li><strong>Achievement:</strong> successful go-live of first product version in 4 months.</li>
+        </ul>
+      </details>
+      <div class="tech-tags">
+        <span>Azure</span><span>AKS</span><span>Azure DevOps</span><span>MS SQL</span><span>Kubernetes</span><span>Hyperledger</span>
+      </div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>DKE — SRE Engineer</h3><span class="dates">4/2016 – 4/2018</span></div>
+      <p class="proj-desc">Fourth largest electronic component distributor in North America, fifth largest overall. Focus on reducing operational cost, eliminating overlapping functionality, and scaling external API services.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 20</span></div>
+      <details>
+        <summary>Responsibilities &amp; achievements</summary>
+        <ul>
+          <li>Administered production Kubernetes AKS and 3rd-party apps for high availability.</li>
+          <li>Monitored Azure AKS proactively; hardened and optimized underlying Ubuntu Linux hosts.</li>
+          <li>Built/deployed microservices to Azure AKS, containerized with Docker.</li>
+          <li>Defined and implemented monitoring, backup, security, DR, and capacity planning policies.</li>
+          <li><strong>Achievement:</strong> migrated 800K LOC monolith into 200+ microservices with zero downtime.</li>
+        </ul>
+      </details>
+      <div class="tech-tags"><span>Azure AKS</span><span>Docker</span><span>Azure DevOps</span><span>Datadog</span></div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>SIA — Blockchain Developer</h3><span class="dates">1/2016 – 12/2016</span></div>
+      <p class="proj-desc">Flag carrier airline of Singapore. Built a loyalty management ecosystem on Ethereum blockchain — users redeem points for air tickets or cash.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 8</span></div>
+      <details>
+        <summary>Responsibilities</summary>
+        <ul>
+          <li>Created smart contracts in Solidity for Ethereum.</li>
+          <li>Built decentralized applications (DApps) interacting with blockchain networks.</li>
+          <li>Set up Ethereum blockchain infrastructure on Azure.</li>
+        </ul>
+      </details>
+      <div class="tech-tags"><span>Ethereum</span><span>Solidity</span><span>Node.js</span><span>Azure</span></div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>PISDX — Technical Lead</h3><span class="dates">4/2012 – 4/2015</span></div>
+      <p class="proj-desc">Panasonic Corporation division manufacturing electronic components for industrial applications. Built a Control Page Builder web app, mobile app, and Windows 8 app to control/display automatic device data. Won the Panasonic R&amp;D Award.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 9</span></div>
+      <details>
+        <summary>Responsibilities</summary>
+        <ul>
+          <li>Software architecture and detail design (UML); led development team.</li>
+          <li>Developed Control Page Builder webpage (HTML5, jQuery) and Android device-info app.</li>
+          <li>Built library to read/display data from automation devices via RS485/RS232.</li>
+          <li>Developed Windows 8-style .NET/WPF application for device interaction.</li>
+        </ul>
+      </details>
+      <div class="tech-tags"><span>Visual Studio</span><span>WPF</span><span>C#</span><span>HTML5</span><span>jQuery</span></div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>ZINDIO — Software Developer</h3><span class="dates">1/2014 – 1/2015</span></div>
+      <p class="proj-desc">Silicon Valley startup. Designed an Online Ordering Platform (web + Android/iOS) for restaurants, consolidating orders from multiple channels into one app.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 12</span></div>
+      <details>
+        <summary>Responsibilities</summary>
+        <ul>
+          <li>Project management, planning, execution, and monitoring.</li>
+          <li>System analysis/design (UML), database design (MySQL).</li>
+          <li>GUI design and mobile app development (Android &amp; iOS) plus web apps.</li>
+          <li>Web service integration (PHP, RESTful).</li>
+        </ul>
+      </details>
+      <div class="tech-tags"><span>PHP</span><span>MySQL</span><span>HTML5</span><span>JavaScript</span><span>Java</span><span>Android</span><span>iOS</span><span>Objective-C</span></div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>PAD — Software Developer</h3><span class="dates">8/2012 – 6/2013</span></div>
+      <p class="proj-desc">Internal Panasonic R&amp;D division. Designed image processing library for face detection and recognition on Panasonic's UnipherS microprocessor.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 4</span></div>
+      <div class="tech-tags"><span>C/C++</span><span>OpenCV</span><span>RTOS</span><span>uTron</span><span>Unipher-S</span></div>
+    </div>
+
+    <div class="proj-item">
+      <div class="proj-head"><h3>PSN — Software Developer</h3><span class="dates">1/2010 – 4/2012</span></div>
+      <p class="proj-desc">Panasonic communications and networking division. Developed an in-vehicle infotainment system, researching MirrorLink technology for the Automotive Car Head Unit.</p>
+      <div class="proj-meta"><span><strong>Team size:</strong> 5</span></div>
+      <div class="tech-tags"><span>C/C++</span><span>RTP</span><span>UDP</span><span>USB</span><span>VNC</span></div>
+    </div>
+  </section>
+
+  <div class="two-col">
+    <section class="interests">
+      <h2 class="section-title">Interests</h2>
+      <ul class="refs">
+        <li>Reading: scientific books, novels, historic books</li>
+        <li>Writing: tutorials, technical blogs</li>
+        <li>Drawing, playing piano, cooking</li>
+        <li>Scientific research in electronics, telecommunication, measurement, and control</li>
+      </ul>
+    </section>
+
+    <section class="references">
+      <h2 class="section-title">References</h2>
+      <div class="refs">
+        <p><strong>Mr. Dang Duy Thanh</strong> — Head of Business Unit, FSG.MBI, FPT Software</p>
+        <p><strong>Mr. Yugawa</strong> — Director of Panasonic R&amp;D Center Vietnam (2011–2015)</p>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="links">
+    <a href="https://www.giaosucan.com/" target="_blank">Blog</a>
+    <a href="https://www.github.com/giaosucan" target="_blank">GitHub</a>
+    <a href="https://leetcode.com/giaosucan/" target="_blank">LeetCode</a>
+    <a href="https://www.linkedin.com/in/giaosucan/" target="_blank">LinkedIn</a>
+    <a href="https://credly.com/users/giaosucan/badges" target="_blank">Credly</a>
+    <a href="https://learn.microsoft.com/en-us/users/giaosucan/transcript/dle91awzk88nzo1?tab=credentials-tab" target="_blank">MS Learn</a>
+  </div>
+  <div>Publications: FPT Tech-Insight, Guru99</div>
+  <div style="margin-top:8px;">© Do Trong Nguyen</div>
+</footer>
+
+</body>
+</html>
